@@ -1,0 +1,14 @@
+@import "normalize";
+@import "variables";
+@import "mixins";
+@import "utilities";
+
+
+@import "globals";
+@import "components/header";
+@import "components/footer";
+@import "components/form";
+@import "pages/color";
+@import "pages/create";
+@import "pages/index";
+@import "pages/view";
