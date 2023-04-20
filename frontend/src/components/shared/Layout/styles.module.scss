@@ -1,15 +1,16 @@
-@use 'styles/variables';
+@use 'styles/mixins/breakpoints';
+
 
 .page-container {
     position: relative;
     min-height: 100vh;
-    background-color: variables.$blue;
 }
 
 .main {
+    padding-top: 1rem;
     padding-bottom: 10rem;
 
-    /*@include breakpoint-up(xl){
+    @include breakpoints.breakpoint-up(xl) {
         margin: 0 10%;
-    }*/
+    }
 }

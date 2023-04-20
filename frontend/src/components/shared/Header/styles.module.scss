@@ -1,0 +1,142 @@
+@use 'styles/variables';
+@use 'styles/mixins/breakpoints';
+
+
+.header {
+    position: relative;
+    background-color: variables.$blue;
+
+    .header-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+
+        @include breakpoints.breakpoint-up(xl) {
+            padding: 1rem 10%;
+        }
+    }
+
+    &.show {
+        .nav-toggler {
+            span:nth-child(1) {
+                transform: rotateZ(225deg) translateY(-50%);
+                top: 50%;
+                transform-origin: 50% 0;
+            }
+
+            span:nth-child(2) {
+                transform: rotateZ(180deg) translateY(-50%);
+                visibility: hidden;
+                transition: all 0s ease-in-out;
+            }
+
+            span:nth-child(3) {
+                transform: rotateZ(-225deg) translateY(-50%);
+                top: 50%;
+                transform-origin: 50% 0;
+            }
+        }
+    }
+
+    @include breakpoints.breakpoint-up(md) {
+        background-color: inherit;
+    }
+}
+
+.logo {
+    display: inline-block;
+    background-image: url('/images/logo-sm.png');
+    background-size: 100%;
+    width: 165px;
+    height: 40px;
+    vertical-align: middle;
+
+    @include breakpoints.breakpoint-up(md) {
+        background-image: url('/images/logo.png');
+        width: 220px;
+        height: 53px;
+    }
+}
+
+.nav-toggler {
+    position: relative;
+    background-color: transparent;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    border: none;
+    cursor: pointer;
+
+    span {
+        position: absolute;
+        background-color: variables.$white;
+        display: block;
+        width: 100%;
+        height: 2px;
+        transform: rotateZ(0deg);
+        transition: all 0.3s ease-in-out;
+
+        &:nth-child(1) {
+            top: 10%;
+        }
+
+        &:nth-child(2) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        &:nth-child(3) {
+            bottom: 10%;
+        }
+    }
+
+    @include breakpoints.breakpoint-up(md) {
+        display: none;
+    }
+}
+
+.nav {
+    position: relative;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin-bottom: -1rem;
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        margin: 1rem 0 0 0;
+
+        li {
+            border-top: 1px solid variables.$white;
+
+            a {
+                display: block;
+            }
+
+            @include breakpoints.breakpoint-up(md) {
+                border-top: none !important;
+                margin: 0 0.1rem;
+            }
+        }
+
+        @include breakpoints.breakpoint-up(md) {
+            flex-direction: row;
+        }
+    }
+
+    @include breakpoints.breakpoint-up(md) {
+        position: static;
+        display: flex;
+        width: inherit;
+        margin-bottom: 0;
+    }
+}
+
+.collapsing {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease;
+}
