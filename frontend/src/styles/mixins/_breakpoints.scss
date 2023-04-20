@@ -1,0 +1,21 @@
+@use '../variables';
+
+@function breakpoint-min($breakpoint) {
+    @return map-get(variables.$breakpoints, $breakpoint);
+}
+
+@function breakpoint-max($breakpoint) {
+    @return map-get(variables.$breakpoints, $breakpoint) - 0.02;
+}
+
+@mixin breakpoint-up($breakpoint) {
+    @media (min-width: breakpoint-min($breakpoint)) {
+        @content;
+    }
+}
+
+@mixin breakpoint-down($breakpoint) {
+    @media (max-width: breakpoint-max($breakpoint)) {
+        @content;
+    }
+}

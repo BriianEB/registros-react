@@ -1,0 +1,15 @@
+@use 'styles/variables';
+
+.page-container {
+    position: relative;
+    min-height: 100vh;
+    background-color: variables.$blue;
+}
+
+.main {
+    padding-bottom: 10rem;
+
+    /*@include breakpoint-up(xl){
+        margin: 0 10%;
+    }*/
+}
