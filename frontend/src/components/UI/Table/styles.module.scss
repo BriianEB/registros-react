@@ -1,0 +1,46 @@
+@use 'styles/variables';
+
+.table {
+    border-collapse: collapse;
+    border: 1px solid variables.$gray;
+
+    th, td {
+        min-width: 10rem;
+        padding: 0.75rem;
+        text-align: center;
+        vertical-align: top;
+        border: 1px solid variables.$gray;
+    }
+
+    thead th {
+        background-color: variables.$gray;
+    }
+
+    tfoot td {
+        text-align: left;
+    }
+
+    tfoot td span {
+        font-weight: bold;
+    }
+}
+
+.table-striped {
+    @extend .table;
+
+    tbody tr:nth-of-type(even) {
+        background-color: rgba(variables.$black, 0.05);
+    }
+
+    th, td {
+        border: none;
+    }
+}
+
+.header-dark {
+    th {
+        background-color: variables.$black-2 !important;
+        color: variables.$white-2 !important;
+        border: 1px solid variables.$black-2 !important;
+    }
+}

@@ -6,7 +6,7 @@ from flask_migrate import Migrate
 from config import config
 from database import db
 
-from controllers import home, alumnos, profesores
+from controllers import alumnos, profesores
 from models import Alumno, Profesor
 
 
@@ -21,7 +21,6 @@ def create_app(config_name):
     db.init_app(app)
     migrate.init_app(app, db, directory=os.path.join(basedir, 'database/migrations'))
 
-    app.register_blueprint(home)
     app.register_blueprint(alumnos)
     app.register_blueprint(profesores)
 
