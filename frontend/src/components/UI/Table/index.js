@@ -13,18 +13,18 @@ function Table(props) {
                 <tr>
                     {columns.map(function (column) {
                         return (
-                            <th>{column.name}</th>
+                            <th key={column.field}>{column.name}</th>
                         );
                     })}
                 </tr>
             </thead>
             <tbody>
                 {rows.map(function (row) {
-                    return(
-                        <tr>
+                    return (
+                        <tr key={row.key}>
                             {columns_keys.map(function (column, index) {
                                 return (
-                                    <td>{row[column]}</td>
+                                    <td key={index}>{row[column]}</td>
                                 );
                             })}
                         </tr>

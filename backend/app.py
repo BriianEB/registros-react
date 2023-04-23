@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 from flask import Flask
+from flask_cors import CORS
 from flask_migrate import Migrate
 
 from config import config
@@ -19,6 +20,7 @@ def create_app(config_name):
     app.config.from_object(config[config_name])
 
     db.init_app(app)
+    cors = CORS(app, resources={r'*': {'origins': '*'}})
     migrate.init_app(app, db, directory=os.path.join(basedir, 'database/migrations'))
 
     app.register_blueprint(alumnos)

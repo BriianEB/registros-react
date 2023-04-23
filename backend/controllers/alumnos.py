@@ -7,6 +7,7 @@ from models import Alumno
 
 alumnos = Blueprint('alumnos', __name__)
 
+@alumnos.route('/alumnos')
 def index():
     alumnos = db.session.execute(db.select(Alumno)).scalars()
 
