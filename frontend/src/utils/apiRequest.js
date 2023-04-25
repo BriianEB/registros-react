@@ -18,11 +18,3 @@ function apiRequest(method, endpoint, data, params) {
 }
 
 export default apiRequest;
-
-/*export default {
-    get: (...args) => request('get', ...args),
-    post: (...args) => request('post', ...args),
-    put: (...args) => request('put', ...args),
-    patch: (...args) => request('patch', ...args),
-    delete: (...args) => request('delete', ...args),
-}*/

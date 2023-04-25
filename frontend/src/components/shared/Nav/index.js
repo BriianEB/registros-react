@@ -1,4 +1,4 @@
-import LinkButton from 'components/UI/LinkButton';
+import LinkButton from 'components/shared/LinkButton';
 
 import styles from './styles.module.scss';
 
@@ -15,7 +15,7 @@ function Nav() {
             <nav className={`${styles['nav']} d-none`}>
                 <ul>
                     <li>
-                        <LinkButton color="primary" size="large" to="/">
+                        <LinkButton color="primary" size="large" to="/alumnos/create">
                             Registrar alumno
                         </LinkButton>
                     </li>

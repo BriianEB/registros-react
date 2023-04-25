@@ -1,10 +1,13 @@
-import { useEffect } from 'react';
+import { useRef } from 'react';
 
 
 function usePageTitle(title) {
-    useEffect(function () {
-        document.title = title;
-    }, [title]);
+    const titleRef = useRef();
+
+    if (titleRef.current !== title) {
+        titleRef.current = title;
+        document.title = titleRef.current;
+    }
 }
 
 export default usePageTitle;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import Button from 'components/UI/Button';
+import Button from 'components/shared/Button';
 //import usePageTitle from 'hooks/usePageTitle';
 
 import styles from './styles.module.scss';

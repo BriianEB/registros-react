@@ -1,6 +1,7 @@
-import { useReducer, useCallback } from 'react';
+import { useCallback, useReducer } from 'react';
 
-import apiRequest from 'utils/api_request';
+import useDeepMemo from './useDeepMemo';
+import apiRequest from 'utils/apiRequest';
 
 
 function apiReducer(state, action) {
@@ -31,30 +32,38 @@ function apiReducer(state, action) {
     return state;
 }
 
-function useApi(method, endpoint, data, params) {
+function useApi(method, endpoint, instanceParams) {
+    const memoParams = useDeepMemo(instanceParams);
+
     const [state, dispatch] = useReducer(apiReducer, {
         status: null,
         data: null,
         error: null
     });
 
-    const request = useCallback(async function (data) {
+    // params: se habilita la opción de pasar los parámetros de la
+    // petición tanto al momento de "instanciar" como al de llamar la función
+    // porque existen dos escenarios: 1) para una petición get, lo ideal es
+    // pasarlos al "instanciar" la función de petición; 2) para las peticiiones
+    // post, patch y put, lo ideal es pasarlos al momento de llamar la función
+    const request = useCallback(function (data, callTimeParams) {
         dispatch({ type: 'SEND' });
 
-        try {
-            const response = await apiRequest(method, endpoint, data, params);
+        const params = callTimeParams ? callTimeParams : memoParams;
+
+        apiRequest(method, endpoint, data, params).then(function (response) {
 
             dispatch({
                  type: 'SUCCESS',
                  data: response.data
              });
-        } catch (error) {
+        }, function (error) {
             dispatch({
                 type: 'ERROR',
                 error: error.message || 'Algo salió mal!'
             });
-        }
-    }, []);
+        });
+    }, [method, endpoint, memoParams]);
 
     return [
         request,
@@ -65,6 +74,7 @@ function useApi(method, endpoint, data, params) {
 }
 
 /* eslint-disable react-hooks/rules-of-hooks */
+// eslint-disable-next-line
 export default {
     get: (...args) => useApi('get', ...args),
     post: (...args) => useApi('post', ...args),

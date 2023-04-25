@@ -2,10 +2,16 @@ from flask import Blueprint, render_template, request, redirect, url_for, abort
 
 import utils.validations as validation
 from database import db
-from models import Alumno, Profesor
+from models import Profesor
 
 
 profesores = Blueprint('profesores', __name__)
+
+@profesores.route('/profesores')
+def index():
+    profesores = db.session.execute(db.select(Profesor)).scalars()
+
+    return [profesor.to_dict() for profesor in profesores]
 
 @profesores.route('/profesores/crear', methods=['GET', 'POST'])
 def create():

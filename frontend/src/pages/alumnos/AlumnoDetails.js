@@ -7,9 +7,7 @@ import Details from 'components/shared/Details';
 
 function AlumnoDetails() {
     const params = useParams();
-
     const alumnoId = params.id;
-    console.log(alumnoId);
 
     const [ getAlumno, status, alumno, error ] = useApi.get(`/alumnos/${alumnoId}`);
 

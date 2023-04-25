@@ -2,9 +2,11 @@ import { Routes as RoutesContainer, Route } from 'react-router-dom';
 
 import Layout from 'components/shared/Layout';
 
-import AlumnoDetails  from 'pages/AlumnoDetails';
+import AlumnoDetails  from 'pages/alumnos/AlumnoDetails';
 import Color from 'pages/Color';
+import CreateAlumno from 'pages/alumnos/CreateAlumno';
 import Home from 'pages/Home';
+import ProfesorDetails from 'pages/profesores/ProfesorDetails';
 
 function Routes() {
     return (
@@ -14,6 +16,10 @@ function Routes() {
                 <Route path="color" element={<Color />} />
                 <Route path="alumnos">
                     <Route path=":id" element={<AlumnoDetails />} />
+                    <Route path="create" element={<CreateAlumno />} />
+                </Route>
+                <Route path="profesores">
+                    <Route path=":id" element={<ProfesorDetails />} />
                 </Route>
             </Route>
         </RoutesContainer>

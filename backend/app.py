@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 
 from config import config
 from database import db
+from errors import register_errors_handlers
 
 from controllers import alumnos, profesores
 from models import Alumno, Profesor
@@ -25,6 +26,8 @@ def create_app(config_name):
 
     app.register_blueprint(alumnos)
     app.register_blueprint(profesores)
+
+    register_errors_handlers(app)
 
     return app
 

@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import tableStyles from 'components/UI/Table/styles.module.scss';
+import tableStyles from 'components/shared/Table/styles.module.scss';
 
 
 function Details(props) {
