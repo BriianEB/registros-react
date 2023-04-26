@@ -20,7 +20,7 @@ def handle_exception(e):
     return response
 
 def resource_not_found(e):
-    """Sobreescribe el manejador del error 404"""
+    """Sobreescribe el manejador del error 404."""
 
     response = e.get_response()
 

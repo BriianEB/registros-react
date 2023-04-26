@@ -20,7 +20,7 @@ function Nav() {
                         </LinkButton>
                     </li>
                     <li>
-                        <LinkButton color="primary" size="large" to="/">
+                        <LinkButton color="primary" size="large" to="/profesores/create">
                             Registrar profesor
                         </LinkButton>
                     </li>

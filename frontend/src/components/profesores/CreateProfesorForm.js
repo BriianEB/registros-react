@@ -7,18 +7,10 @@ import Input from 'components/shared/Input';
 
 
 const validations = {
-    matricula: {
+    no_empleado: {
         required: {
             value: true,
             message: 'Debes llenar este campo'
-        },
-        minLength: {
-            value: 7,
-            message: 'Ingresa un valor de exactamente 7 caracteres'
-        },
-        maxLength: {
-            value: 7,
-            message: 'Ingresa un valor de exactamente 7 caracteres'
         }
     },
     nombre: {
@@ -33,16 +25,6 @@ const validations = {
             message: 'Debes llenar este campo'
         }
     },
-    email: {
-        required: {
-            value: true,
-            message: 'Debes llenar este campo'
-        },
-        pattern: {
-            value: /[\w-]+@[\w]+\.[\w]+/,
-            message: 'Ingresa un email válido'
-        }
-    },
     telefono: {
         required: {
             value: true,
@@ -55,20 +37,20 @@ const validations = {
     }
 };
 
-function CreateAlumnoForm(props) {
+function CreateProfesorForm(props) {
     const { onCreate } = props;
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [ createAlumno, postStatus, alumno, apiErrors ] = useApi.post('/alumnos');
+    const [ createProfesor, postStatus, profesor, apiErrors ] = useApi.post('/profesores');
 
     useEffect(function () {
         if (postStatus === 'completed') {
-            onCreate(alumno);
+            onCreate(profesor);
         }
-    }, [postStatus, onCreate, alumno]);
+    }, [postStatus, onCreate, profesor]);
 
     function submitHandler(data) {
-        createAlumno(data);
+        createProfesor(data);
     }
 
     function getApiErrorField(field) {
@@ -84,16 +66,16 @@ function CreateAlumnoForm(props) {
     return (
         <form onSubmit={handleSubmit(submitHandler)}>
             <Input
-                name="matricula"
-                label="Matricula"
+                name="no_empleado"
+                label="Número de empleado"
                 register={register}
-                validations={validations.matricula}
-                error={errors.matricula || getApiErrorField('matricula')}
+                validations={validations.no_empleado}
+                error={errors.no_empleado || getApiErrorField('no_empleado')}
             />
 
             <Input
                 name="nombre"
-                label="nombre"
+                label="Nombre"
                 register={register}
                 validations={validations.nombre}
                 error={errors.nombre || getApiErrorField('nombre')}
@@ -105,14 +87,6 @@ function CreateAlumnoForm(props) {
                 register={register}
                 validations={validations.carrera}
                 error={errors.carrera || getApiErrorField('carrera')}
-            />
-
-            <Input
-                name="email"
-                label="Correo electrónico"
-                register={register}
-                validations={validations.email}
-                error={errors.email || getApiErrorField('email')}
             />
 
             <Input
@@ -137,4 +111,4 @@ function CreateAlumnoForm(props) {
     );
 }
 
-export default CreateAlumnoForm;
+export default CreateProfesorForm;

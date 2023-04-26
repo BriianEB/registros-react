@@ -5,6 +5,7 @@ import Layout from 'components/shared/Layout';
 import AlumnoDetails  from 'pages/alumnos/AlumnoDetails';
 import Color from 'pages/Color';
 import CreateAlumno from 'pages/alumnos/CreateAlumno';
+import CreateProfesor from 'pages/profesores/CreateProfesor';
 import Home from 'pages/Home';
 import ProfesorDetails from 'pages/profesores/ProfesorDetails';
 
@@ -20,6 +21,7 @@ function Routes() {
                 </Route>
                 <Route path="profesores">
                     <Route path=":id" element={<ProfesorDetails />} />
+                    <Route path="create" element={<CreateProfesor />} />
                 </Route>
             </Route>
         </RoutesContainer>

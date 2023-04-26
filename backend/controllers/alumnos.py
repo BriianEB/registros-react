@@ -1,33 +1,29 @@
-from flask import Blueprint, request, redirect, abort
+from flask import Blueprint, request
 from sqlalchemy.exc import NoResultFound
 from werkzeug.exceptions import NotFound
 
-import utils.validations as validation
-from exceptions import ValidationError
 from database import db
+from exceptions import ValidationError
 from models import Alumno
+import utils.validations as validation
 
 
 alumnos = Blueprint('alumnos', __name__)
 
 @alumnos.route('/alumnos')
 def index():
-    raise ValidationError({'errors': 'asd'})
     alumnos = db.session.execute(db.select(Alumno)).scalars()
 
     return [alumno.to_dict() for alumno in alumnos]
 
-@alumnos.route('/alumnos/crear', methods=['GET', 'POST'])
-def create():
+@alumnos.route('/alumnos', methods=['POST'])
+def create():    
     data = request.get_json()
 
     errors = validation.validate(Alumno.validations, data)
 
     if errors:
-        abort(400, description={
-            'message': 'There were validation errors.',
-            'data': errors
-        })
+        raise ValidationError({'fields': errors})
 
     alumno = Alumno(
         matricula=data['matricula'],
@@ -45,7 +41,6 @@ def create():
 
 @alumnos.route('/alumnos/<id>')
 def show(id):
-    raise ValidationError({'fields': {'a': 'b'}})
     try:
         alumno = db.session.execute(db.select(Alumno).filter_by(id=id)).scalar_one()
     except NoResultFound:

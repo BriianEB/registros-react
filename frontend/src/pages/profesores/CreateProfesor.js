@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 
-import CreateAlumnoForm from 'components/alumnos/CreateAlumnoForm';
+import CreateProfesorForm from 'components/profesores/CreateProfesorForm';
 
 
-function CreateAlumno() {
+function CreateProfesor() {
     const navigate = useNavigate();
 
     function onCreateHandler() {
@@ -13,14 +13,14 @@ function CreateAlumno() {
     return (
         <>
             <div className="form-title">
-                <h1>Agregar un alumno</h1>
+                <h1>Agregar un profesor</h1>
             </div>
 
             <div className="form-container">
-                <CreateAlumnoForm onCreate={onCreateHandler} />
+                <CreateProfesorForm onCreate={onCreateHandler} />
             </div>
         </>
     );
 }
 
-export default CreateAlumno;
+export default CreateProfesor;

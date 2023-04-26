@@ -52,15 +52,15 @@ function useApi(method, endpoint, instanceParams) {
         const params = callTimeParams ? callTimeParams : memoParams;
 
         apiRequest(method, endpoint, data, params).then(function (response) {
-
             dispatch({
                  type: 'SUCCESS',
-                 data: response.data
+                 data: response
              });
         }, function (error) {
+            console.log(error);
             dispatch({
                 type: 'ERROR',
-                error: error.message || 'Algo salió mal!'
+                error: error
             });
         });
     }, [method, endpoint, memoParams]);

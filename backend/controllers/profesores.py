@@ -1,8 +1,11 @@
-from flask import Blueprint, render_template, request, redirect, url_for, abort
+from flask import Blueprint, request
+from sqlalchemy.exc import NoResultFound
+from werkzeug.exceptions import NotFound
 
-import utils.validations as validation
 from database import db
+from exceptions import ValidationError
 from models import Profesor
+import utils.validations as validation
 
 
 profesores = Blueprint('profesores', __name__)
@@ -13,14 +16,14 @@ def index():
 
     return [profesor.to_dict() for profesor in profesores]
 
-@profesores.route('/profesores/crear', methods=['GET', 'POST'])
-def create():
-    data = request.form
+@profesores.route('/profesores', methods=['POST'])
+def create():    
+    data = request.get_json()
 
     errors = validation.validate(Profesor.validations, data)
 
     if errors:
-        pass
+        raise ValidationError({'fields': errors})
 
     profesor = Profesor(
         no_empleado=data['no_empleado'],
@@ -38,7 +41,7 @@ def create():
 def show(id):
     try:
         profesor = db.session.execute(db.select(Profesor).filter_by(id=id)).scalar_one()
-    except:
-        abort(404)
+    except NoResultFound:
+        raise NotFound()
 
     return profesor.to_dict()

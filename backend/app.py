@@ -1,5 +1,4 @@
 import os
-from datetime import datetime
 from flask import Flask
 from flask_cors import CORS
 from flask_migrate import Migrate
@@ -32,11 +31,6 @@ def create_app(config_name):
     return app
 
 app = create_app(os.environ.get('APP_ENV'))
-
-# templates context
-@app.context_processor
-def inject_now():
-    return {'datetime': datetime}
 
 # shell context
 @app.shell_context_processor
